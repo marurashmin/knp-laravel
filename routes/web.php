@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoryController;
+// use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +14,9 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',['uses'=>'CategoryController@index']);
 
+Route::resource('/category', CategoryController::class);
+Route::resource('/product', ProductController::class);
 Route::get('category-tree-view',['uses'=>'CategoryController@manageCategory'])->name("manageCategory");
 Route::post('add-category',['as'=>'add.category','uses'=>'CategoryController@addCategory']);
-Route::resource('/product', ProductController::class);

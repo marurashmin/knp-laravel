@@ -6,7 +6,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('category*') ? 'active' : '' }}"
-                            href="{{ route('manageCategory') }}">
+                            href="{{ route('category.index') }}">
                             <div
                                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                 <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1"
@@ -38,7 +38,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('book*') ? 'active' : '' }}"
+                        <a class="nav-link {{ request()->routeIs('product*') ? 'active' : '' }}"
                             href="{{ route('product.index') }}">
                             <div
                                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -67,7 +67,7 @@
                                     </g>
                                 </svg>
                             </div>
-                            <span class="nav-link-text ms-1">Book</span>
+                            <span class="nav-link-text ms-1">Product</span>
                         </a>
                     </li>
                 </ul>

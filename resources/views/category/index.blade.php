@@ -1,10 +1,11 @@
 @extends('layouts.master')
 
 @section('title')
-    Categories
+    Category
 @endsection
 
 @section('content')
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -32,8 +33,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Id</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Category Name</th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Description</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
                                     <th class="text-center text-secondary text-uppercase text-secondary text-xxs font-weight-bold opacity-7">Action</th>
 
                                 </tr>
@@ -44,26 +44,28 @@
                                     <tr>
                                         <input type="hidden" class="catdelete_val_id" value="{{ $category->id }}">
                                         <td class="text-xs align-middle text-center font-weight-bold">{{ ++$i }}</td>
-                                        <td class="text-xs align-middle text-center font-weight-bold">{{ $category->name }}</td>
-                                        <td class="text-xs align-middle text-center font-weight-bold">{{ $category->description }}</td>
+                                        <td class="text-xs align-middle text-center font-weight-bold">{{ $category->title }}</td>
                                         <td class="align-middle text-center text-sm">
-                                            <!-- <span class="p-2">
+                                            <span class="p-2">
                                                 <a href="{{ route('category.edit',$category->id) }}"><i class="fas fa-user-edit text-secondary"></i></a>
                                             </span>
                                             <span class="deleteCategory p-2">
                                                 <a href="javascript:void(0)"><i class="fas fa-trash text-secondary"></i></a>
-                                            </span> -->
+                                            </span>
                                         </td>
                                     </tr>
+                                    @if(count($category->childs))
+				                        @include('category.manageChild',['childs' => $category->childs])
+				                    @endif
                                     @endforeach
-                                @else
+                                    @else
                                 <tr>
                                     <td>No records found</td>
                                 </tr>
                                 @endif
                             </tbody>
                         </table>
-                        {{$categories->links()}}
+                        {{-- {{$categories->links()}} --}}
                     </div>
                 </div>
             </div>
@@ -88,7 +90,7 @@
                 .then((willDelete) => {
                     if (willDelete) {
                         var data = {
-                            "_token": $('input[name=_token]').val(),
+                            "_token": "{{ csrf_token() }}",
                             "id": delete_id,
                         };
                         $.ajax({

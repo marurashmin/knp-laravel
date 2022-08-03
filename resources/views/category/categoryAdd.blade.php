@@ -30,8 +30,18 @@
                                 @enderror
                             </div>
                             <div class="col-md-9 mt-2">
-                                <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" name="description" id="description"></textarea>
+                                <label for="category" class="form-label">Category <span class="text-danger">*</span></label>
+                                <select name="category" id="category" class="form-control selectBox @error('category') is-invalid @enderror">
+                                    <option selected disabled>Select Category</option>
+                                    @foreach ($categories as $row)
+                                        <option value="{{ $row->id }}" {{ (old("category") == $row->id ? "selected":"") }}>{{$row->title}}</option>
+                                    @endforeach
+                                </select>
+                                @error('category')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="col-md-9 mt-2">
                                 <div class="d-flex align-items-center justify-content-end">
