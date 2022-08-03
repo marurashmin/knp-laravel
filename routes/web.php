@@ -18,5 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('category-tree-view',['uses'=>'CategoryController@manageCategory']);
+Route::get('category-tree-view',['uses'=>'CategoryController@manageCategory'])->name("manageCategory");
 Route::post('add-category',['as'=>'add.category','uses'=>'CategoryController@addCategory']);
+Route::resource('/product', ProductController::class);
